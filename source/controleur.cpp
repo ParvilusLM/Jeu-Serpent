@@ -44,11 +44,6 @@ void Controleur::changerDirSerp(int no_serp, int dirSerp)
     m_decor->getSerpent().setDirectSerp(no_serp,dirSerp);
 }
 
-void Controleur::changerDirSerpIa()
-{
-
-}
-
 void Controleur::ajouteNPDS(int no_serp)
 {
     m_decor->getSerpent().ajouteNPDS(no_serp);
@@ -255,6 +250,140 @@ void Controleur::pauseJeu()
     else
         jeuPause=true;
 }
+
+void Controleur::changerDirSerpIA()
+{
+    // vecteur representant l'ensemble des cases des differents chemins
+    std::vector<CaseValable> eChemin;
+
+    //vecteur pour stocker les cases a tester
+    std::vector<CaseValable> eCasesATester;
+
+    //vector pour le chemin choisi
+    std::vector<CaseValable> eCaseChemChoisi;
+
+    int tableauVirtuel[29][33]={0};
+
+    //initialisation du tableau virtuel
+    int compt=0;
+    while(compt<m_decor->getSerpent().getVectSerpents().size())
+    {
+        int compt2=0;
+        while(compt2<m_decor->getSerpent().getVectSerpents().at(compt).size())
+        {
+            int positX=m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().x/20.f;
+            int positY=m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().y/20.f;
+
+            if(compt==0 && compt2==0)
+            {
+                tableauVirtuel[positY][positX]=TETE1;
+            }
+            else if(compt==1 && compt2==0)
+            {
+                tableauVirtuel[positY][positX]=TETE2;
+            }
+            else
+            {
+                tableauVirtuel[positY][positX]=CORPS;
+            }
+
+            compt2++;
+        }
+
+        compt++;
+
+    }
+
+    int positX=m_decor->getPosFruit().x/20.f;
+    int positY=m_decor->getPosFruit().y/20.f;
+
+    tableauVirtuel[positX][positY]=FRUIT;
+
+    //affiche le tableau virtuel
+    int cmpt=0;
+
+    while(cmpt<29)
+    {
+        int cmpt2=0;
+        while(cmpt2<33)
+        {
+            std::cout<<tableauVirtuel[cmpt][cmpt2]<<"  ";
+
+            cmpt2++;
+        }
+        std::cout<<"\n";
+        cmpt++;
+    }
+
+    //**  determiner la direction a suivre   **//
+
+    //determiner s'il y a au moins une case vide pour se deplacer
+    bool changDirPossib=false;
+    int compt2=0;
+    while(compt2<29)
+    {
+        int compt3=0;
+        while(compt3<33)
+        {
+            if(tableauVirtuel[compt2][compt3]==4)
+            {
+                if(compt2>0)
+                {
+                    if(tableauVirtuel[compt2-1][compt3]==4)
+                    {
+                        changDirPossib=true;
+                    }
+                }
+
+                if(compt2<32)
+                {
+                    if(tableauVirtuel[compt2+1][compt3]==4)
+                    {
+                        changDirPossib=true;
+                    }
+                }
+
+                if(compt3>0)
+                {
+                    if(tableauVirtuel[compt2][compt3-1]==4)
+                    {
+                        changDirPossib=true;
+                    }
+                }
+
+                if(compt3<28)
+                {
+                    if(tableauVirtuel[compt2][compt3+1]==4)
+                    {
+                        changDirPossib=true;
+                    }
+
+                }
+            }
+            compt3++;
+        }
+        compt2++;
+    }
+
+
+    if(changDirPossib)
+    {
+        //valeur a verifier
+        int valAVerif=4;
+
+        //variables pour connaitre le nombre de chemins
+        int nChemins=0;
+        int nCheminsTerm=0;
+
+    }
+
+
+
+
+
+
+}
+
 
 Controleur::~Controleur()
 {

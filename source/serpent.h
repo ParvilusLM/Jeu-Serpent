@@ -24,7 +24,7 @@ public:
     std::vector< std::vector<element_serpent> > getVectSerpents();
     void afficherSerpent();
     void setDirectSerp(int no_serp, int dirSerp);
-    void changerDirSerpIA();
+
 
 
 

@@ -86,9 +86,6 @@ void Serpent::initSerpent()
     direcSerp2.dir_s_b=false;
 
     m_dirSerp.push_back(direcSerp2);
-
-
-
 }
 
 
@@ -416,10 +413,6 @@ void Serpent::setDirectSerp(int no_serp, int dirSerp)
 
 }
 
-void Serpent::changerDirSerpIA()
-{
-
-}
 
 Serpent::~Serpent()
 {

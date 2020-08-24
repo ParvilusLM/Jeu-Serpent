@@ -68,6 +68,7 @@ int main()
                       {
                           horloge.restart();
                           controleurJ.debutJeu();
+                          controleurJ.changerDirSerpIA();
                       }
                   }
             }
@@ -124,7 +125,7 @@ int main()
 
             if(jeuEnCours && !HumvsHum)
             {
-                controleurJ.changerDirSerpIa();
+
             }
 
         }

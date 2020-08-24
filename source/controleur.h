@@ -15,7 +15,6 @@ public:
     void afficheSerp();
     void mouvementSerp();
     void changerDirSerp(int no_serp, int dirSerp);
-    void changerDirSerpIa();
     void ajouteNPDS(int no_serp);
     void ajouteFruit();
     void collisionSerp();
@@ -27,6 +26,8 @@ public:
     void gestionDplSouris();
     void gestionSelectionSouris();
     void pauseJeu();
+
+    void changerDirSerpIA();
 
 
 

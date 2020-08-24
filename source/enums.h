@@ -87,5 +87,14 @@ enum
     s_queue_B
 };
 
+enum
+{
+    VIDE,
+    FRUIT,
+    CORPS,
+    TETE1,
+    TETE2
+};
+
 
 #endif // DEF_ENUMS
