@@ -24,7 +24,7 @@ struct CaseValable
     bool mouv_g;
     bool mouv_d;
     bool mouv_h;
-    bool mouv_d;
+    bool mouv_b;
 };
 
 #endif // DEF_VARG

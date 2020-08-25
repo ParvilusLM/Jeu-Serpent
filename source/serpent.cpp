@@ -5,6 +5,7 @@ Serpent::Serpent(sf::RenderWindow &fenetre):m_fenetre(0)
 {
     m_fenetre=&fenetre;
     m_t_spritesSerp.loadFromFile("donnees/serpent_sprit.png");
+    m_t_spritesSerp2.loadFromFile("donnees/serpent_sprit2.png");
 
     m_mouvX=20.f;
     m_mouvY=20.f;
@@ -56,25 +57,25 @@ void Serpent::initSerpent()
     element_serpent tete2;
     tete2.el_spr.setPosition(190.f,410.f);
     tete2.el_spr.setOrigin(10.f,10.f);
-    tete2.el_spr.setTexture(m_t_spritesSerp);
+    tete2.el_spr.setTexture(m_t_spritesSerp2);
     m_serpent2.insert(m_serpent2.begin(),tete2);
 
     element_serpent corps1s;
     corps1s.el_spr.setPosition(170.f,410.f);
     corps1s.el_spr.setOrigin(10.f,10.f);
-    corps1s.el_spr.setTexture(m_t_spritesSerp);
+    corps1s.el_spr.setTexture(m_t_spritesSerp2);
     m_serpent2.insert(m_serpent2.end(),corps1s);
 
     element_serpent corps2s;
     corps2s.el_spr.setPosition(150.f,410.f);
     corps2s.el_spr.setOrigin(10.f,10.f);
-    corps2s.el_spr.setTexture(m_t_spritesSerp);
+    corps2s.el_spr.setTexture(m_t_spritesSerp2);
     m_serpent2.insert(m_serpent2.end(),corps2s);
 
     element_serpent queus;
     queus.el_spr.setPosition(130.f,410.f);
     queus.el_spr.setOrigin(10.f,10.f);
-    queus.el_spr.setTexture(m_t_spritesSerp);
+    queus.el_spr.setTexture(m_t_spritesSerp2);
     m_serpent2.insert(m_serpent2.end(),queus);
 
     m_serpent.insert(m_serpent.end(),m_serpent2);
@@ -124,7 +125,16 @@ void Serpent::ajouteNPDS(int no_serp)
 {
     element_serpent nouv_morceau;
     nouv_morceau.el_spr.setOrigin(10.f,10.f);
-    nouv_morceau.el_spr.setTexture(m_t_spritesSerp);
+
+    if(no_serp==1)
+    {
+        nouv_morceau.el_spr.setTexture(m_t_spritesSerp);
+    }
+    else
+    {
+        nouv_morceau.el_spr.setTexture(m_t_spritesSerp2);
+    }
+
 
     int dern_el=m_serpent.at(no_serp-1).size()-1;
     float posX=m_serpent.at(no_serp-1).at(dern_el).el_spr.getPosition().x;

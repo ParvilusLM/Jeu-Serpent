@@ -68,7 +68,7 @@ int main()
                       {
                           horloge.restart();
                           controleurJ.debutJeu();
-                          controleurJ.changerDirSerpIA();
+                          //controleurJ.changerDirSerpIA();
                       }
                   }
             }

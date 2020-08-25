@@ -375,6 +375,129 @@ void Controleur::changerDirSerpIA()
         int nChemins=0;
         int nCheminsTerm=0;
 
+        //
+        int comptt=0;
+        while(comptt<1)
+        {
+            if(valAVerif==4)
+            {
+                CaseValable elCase;
+                elCase.valeur_chemin=4;
+
+                int comp=0;
+                while(comp<29)
+                {
+                    int comp2=0;
+                    while(comp2<33)
+                    {
+                        if(tableauVirtuel[comp][comp2]==4)
+                        {
+                            elCase.positionX=comp2;
+                            elCase.positionY=comp;
+                        }
+                        comp2++;
+                    }
+                    comp++;
+                }
+
+                elCase.lien_ch_precd=0;
+                elCase.num_chem=4;
+                eChemin.insert(eChemin.end(),elCase);
+            }
+
+            int noChemin=0; //pour savoir le nombre de cases a tester
+
+            //initialisation de la variable noChemin
+            int cmptt=0;
+            while(cmptt<29)
+            {
+                int cmptt2=0;
+                while(cmptt2<33)
+                {
+                    if(tableauVirtuel[cmptt][cmptt2]==valAVerif)
+                    {
+                        noChemin++;
+                    }
+                    cmptt2++;
+                }
+                cmptt++;
+            }
+
+            //stockage des cases dans le eCasesATester
+            eCasesATester.clear();
+            int dernEl=eChemin.size()-1;
+            int pseudoNoChem=noChemin;
+
+            int cmp=0;
+            while(cmp<noChemin)
+            {
+                int indicEl=pseudoNoChem-1;
+                eCasesATester.insert(eCasesATester.end(),eChemin.at(dernEl-indicEl));
+                pseudoNoChem--;
+                cmp++;
+            }
+
+            int pseudoCompt=0;
+            //boucle dans le tableau virtuel pour trouver valAVerif
+            int compt3=0;
+            while(compt3<29)
+            {
+                int compt4=0;
+                while(compt4<33)
+                {
+                    if(tableauVirtuel[compt3][compt4]==valAVerif)
+                    {
+                        bool dirG=false;
+                        bool dirD=false;
+                        bool dirH=false;
+                        bool dirB=false;
+
+                        //condition pour savoir que la direction est valide
+                        if(compt4>0) //dirG
+                        {
+                            if(tableauVirtuel[compt3][compt4-1]==0)
+                            {
+                                dirG=true;
+                            }
+                        }
+
+                        if(compt4<32) //dirD
+                        {
+                            if(tableauVirtuel[compt3][compt4+1]==0)
+                            {
+                                dirD=true;
+                            }
+                        }
+
+                        if(compt3>0) //dirH
+                        {
+                            if(tableauVirtuel[compt3-1][compt4]==0)
+                            {
+                                dirH=true;
+                            }
+                        }
+
+                        if(compt3<28) //dirB
+                        {
+                            if(tableauVirtuel[compt3+1][compt4]==0)
+                            {
+                                dirB=true;
+                            }
+                        }
+
+                    }
+                    compt4++;
+                }
+                compt3++;
+            }
+
+
+            //**insertion des direction dans le tableauVirtuel**//
+
+            //
+
+        }
+
     }
 
 

@@ -34,7 +34,7 @@ private:
     float m_mouvX,m_mouvY;
     std::vector<directionSerpent> m_dirSerp;
     std::vector< std::vector<element_serpent> > m_serpent;
-    sf::Texture m_t_spritesSerp;
+    sf::Texture m_t_spritesSerp,m_t_spritesSerp2;
 
 
 };
