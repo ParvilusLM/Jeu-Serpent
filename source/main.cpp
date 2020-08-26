@@ -141,6 +141,7 @@ int main()
                 timer=0;
                 controleurJ.mouvementSerp();
                 controleurJ.collisionSerp();
+
             }
         }
         else

@@ -485,6 +485,98 @@ void Controleur::changerDirSerpIA()
                             }
                         }
 
+                        //**insertion des direction dans le tableauVirtuel**//
+
+                        //1
+                        if(dirG && !dirD && !dirH && !dirB)
+                        {
+
+                        }
+
+                        //2
+                        if(!dirG && dirD && !dirH && !dirB)
+                        {
+
+                        }
+
+                        //3
+                        if(!dirG && !dirD && dirH && !dirB)
+                        {
+
+                        }
+
+                        //4
+                        if(!dirG && !dirD && !dirH && dirB)
+                        {
+
+                        }
+
+                        //5
+                        if(dirG && dirD && !dirH && !dirB)
+                        {
+
+                        }
+
+                        //6
+                        if(dirG && !dirD && dirH && !dirB)
+                        {
+
+                        }
+
+                        //7
+                        if(dirG && !dirD && !dirH && dirB)
+                        {
+
+                        }
+
+                        //8
+                        if(!dirG && dirD && dirH && !dirB)
+                        {
+
+                        }
+
+                        //9
+                        if(!dirG && dirD && !dirH && dirB)
+                        {
+
+                        }
+
+                        //10
+                        if(!dirG && !dirD && dirH && dirB)
+                        {
+
+                        }
+
+                        //11
+                        if(dirG && dirD && dirH && !dirB)
+                        {
+
+                        }
+
+                        //12
+                        if(dirG && dirD && !dirH && dirB)
+                        {
+
+                        }
+
+                        //13
+                        if(dirG && !dirD && dirH && dirB)
+                        {
+
+                        }
+
+                        //14
+                        if(!dirG && dirD && dirH && dirB)
+                        {
+
+                        }
+
+                        //15
+                        if(!dirG && !dirD && !dirH && !dirB)
+                        {
+
+                        }
+
                     }
                     compt4++;
                 }
@@ -492,19 +584,44 @@ void Controleur::changerDirSerpIA()
             }
 
 
-            //**insertion des direction dans le tableauVirtuel**//
 
-            //
 
         }
 
     }
 
 
+}
 
+void Controleur::insertionCase(std::vector<CaseValable> &eChemin,int posX,int posY,int valCh,int lienChPrecd,int numCh,int mouv)
+{
+    std::vector<CaseValable> *eChmin=&eChemin;
 
+    CaseValable elCase;
+    elCase.positionX=posX;
+    elCase.positionY=posY;
+    elCase.valeur_chemin=valCh;
+    elCase.lien_ch_precd=lienChPrecd;
+    elCase.num_chem=numCh;
 
+    if(mouv==0)
+    {
 
+    }
+    else if()
+    {
+
+    }
+    else if()
+    {
+
+    }
+    else
+    {
+
+    }
+
+    eChmin->insert(eChmin->end(),elCase);
 }
 
 
