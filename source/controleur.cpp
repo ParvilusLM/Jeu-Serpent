@@ -262,9 +262,8 @@ void Controleur::changerDirSerpIA()
     //vector pour le chemin choisi
     std::vector<CaseValable> eCaseChemChoisi;
 
-    int tableauVirtuel[29][33]={0};
-
     //initialisation du tableau virtuel
+    int tableauVirtuel[29][33]={0};
     int compt=0;
     while(compt<m_decor->getSerpent().getVectSerpents().size())
     {
@@ -455,7 +454,7 @@ void Controleur::changerDirSerpIA()
                         //condition pour savoir que la direction est valide
                         if(compt4>0) //dirG
                         {
-                            if(tableauVirtuel[compt3][compt4-1]==0)
+                            if(tableauVirtuel[compt3][compt4-1]==0 || tableauVirtuel[][]==4)
                             {
                                 dirG=true;
                             }
@@ -463,7 +462,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt4<32) //dirD
                         {
-                            if(tableauVirtuel[compt3][compt4+1]==0)
+                            if(tableauVirtuel[compt3][compt4+1]==0 || tableauVirtuel[][]==4)
                             {
                                 dirD=true;
                             }
@@ -471,7 +470,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3>0) //dirH
                         {
-                            if(tableauVirtuel[compt3-1][compt4]==0)
+                            if(tableauVirtuel[compt3-1][compt4]==0 || tableauVirtuel[][]==4)
                             {
                                 dirH=true;
                             }
@@ -479,7 +478,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3<28) //dirB
                         {
-                            if(tableauVirtuel[compt3+1][compt4]==0)
+                            if(tableauVirtuel[compt3+1][compt4]==0 || tableauVirtuel[][]==4)
                             {
                                 dirB=true;
                             }
@@ -488,118 +487,96 @@ void Controleur::changerDirSerpIA()
                         //**insertion des direction dans le tableauVirtuel**//
 
                         //1
-                        if(dirG && !dirD && !dirH && !dirB)
+                        if(dirG && !dirD && !dirH && !dirB )
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                         }
-
-                        //2
-                        if(!dirG && dirD && !dirH && !dirB)
+                        else if(!dirG && dirD && !dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                         }
-
-                        //3
-                        if(!dirG && !dirD && dirH && !dirB)
+                        else if(!dirG && !dirD && dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                         }
-
-                        //4
-                        if(!dirG && !dirD && !dirH && dirB)
+                        else if(!dirG && !dirD && !dirH && dirB)
                         {
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                         }
-
-                        //5
-                        if(dirG && dirD && !dirH && !dirB)
+                        else if(dirG && dirD && !dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             nChemins++;
                         }
-
-                        //6
-                        if(dirG && !dirD && dirH && !dirB)
+                        else if(dirG && !dirD && dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             nChemins++;
                         }
-
-                        //7
-                        if(dirG && !dirD && !dirH && dirB)
+                        else if(dirG && !dirD && !dirH && dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins++;
                         }
-
-                        //8
-                        if(!dirG && dirD && dirH && !dirB)
+                        else if(!dirG && dirD && dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             nChemins++;
                         }
-
-                        //9
-                        if(!dirG && dirD && !dirH && dirB)
+                        else if(!dirG && dirD && !dirH && dirB)
                         {
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins++;
                         }
-
-                        //10
-                        if(!dirG && !dirD && dirH && dirB)
+                        else if(!dirG && !dirD && dirH && dirB)
                         {
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins++;
                         }
-
-                        //11
-                        if(dirG && dirD && dirH && !dirB)
+                        else if(dirG && dirD && dirH && !dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             nChemins+=2;
                         }
-
-                        //12
-                        if(dirG && dirD && !dirH && dirB)
+                        else if(dirG && dirD && !dirH && dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins+=2;
                         }
-
-                        //13
-                        if(dirG && !dirD && dirH && dirB)
+                        else if(dirG && !dirD && dirH && dirB)
                         {
                             insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,0);
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins+=2;
                         }
-
-                        //14
-                        if(!dirG && dirD && dirH && dirB)
+                        else if(!dirG && dirD && dirH && dirB)
                         {
                             insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,1);
                             insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,2);
                             insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,3);
                             nChemins+=2;
                         }
-
-                        //15
-                        if(!dirG && !dirD && !dirH && !dirB)
+                        else if(!dirG && !dirD && !dirH && !dirB)
                         {
                             nCheminsTerm++;
                         }
+                        else
+                        {
+
+                        }
+
+                        pseudoCompt++;
 
                     }
                     compt4++;
@@ -607,10 +584,61 @@ void Controleur::changerDirSerpIA()
                 compt3++;
             }
 
-
-
+            if(nChemins==nCheminsTerm)
+            {
+                comptt++;
+            }
+            else
+            {
+                valAVerif++;
+            }
 
         }
+
+        //selection et insertion de la case d'arrivee dans eCaseChemChoisi
+        int compt3=0;
+        while(compt3<eChemin.size())
+        {
+            if(eChemin.at(compt3).positionX==positX && eChemin.at(compt3).positionY==positY)
+            {
+                eCaseChemChoisi.insert(eCaseChemChoisi.end(),eChemin.at(compt3));
+            }
+            compt3++;
+        }
+
+        //initialisation du parcours
+        int pseudoCmpt=eChemin.size()-1;
+        int compt4=0;
+        while(compt4<eChemin.size())
+        {
+            if(eChemin.at(pseudoCmpt).num_chem==eCaseChemChoisi.at(eCaseChemChoisi.size()-1).lien_ch_precd && eChemin.at(pseudoCmpt).valeur_chemin==eCaseChemChoisi.at(eCaseChemChoisi.size()-1).valeur_chemin-1)
+            {
+                eCaseChemChoisi.insert(eCaseChemChoisi.end(),eChemin.at(pseudoCmpt));
+            }
+            pseudoCmpt--;
+            compt4++;
+        }
+
+        //determiner la direction a prendre
+        int dernEl=eCaseChemChoisi.size()-1;
+        if(eCaseChemChoisi.at(dernEl-1).i_d_g)
+        {
+            changerDirSerp(SERPENT_2,Droite);
+        }
+        else if(eCaseChemChoisi.at(dernEl-1).i_d_d)
+        {
+            changerDirSerp(SERPENT_2,Gauche);
+        }
+        else if(eCaseChemChoisi.at(dernEl-1).i_d_h)
+        {
+            changerDirSerp(SERPENT_2,Bas);
+        }
+        else
+        {
+            changerDirSerp(SERPENT_2,Haut);
+        }
+
+
 
     }
 

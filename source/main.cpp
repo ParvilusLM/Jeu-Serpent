@@ -68,7 +68,7 @@ int main()
                       {
                           horloge.restart();
                           controleurJ.debutJeu();
-                          //controleurJ.changerDirSerpIA();
+
                       }
                   }
             }
@@ -139,6 +139,7 @@ int main()
             if(timer>delai && !jeuPause)
             {
                 timer=0;
+                controleurJ.changerDirSerpIA();
                 controleurJ.mouvementSerp();
                 controleurJ.collisionSerp();
 
