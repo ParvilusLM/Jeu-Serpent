@@ -135,10 +135,10 @@ void Controleur::collisionSerp()
         sf::FloatRect boiteE_tS=m_decor->getSerpent().getVectSerpents().at(compt).at(0).el_spr.getGlobalBounds();
         if(Collision(boiteE_tS,boiteE_f))
         {
-            ajouteFruit();
             ajouteNPDS(compt+1);
             m_decor->getSon().jouerSon();
             m_decor->getInfo().gestionScore(compt);
+            ajouteFruit();
         }
 
 
@@ -253,6 +253,7 @@ void Controleur::pauseJeu()
 
 void Controleur::changerDirSerpIA()
 {
+    //std::cout<<"Debut fonction changer directionSerpIA"<<std::endl;
     // vecteur representant l'ensemble des cases des differents chemins
     std::vector<CaseValable> eChemin;
 
@@ -296,23 +297,7 @@ void Controleur::changerDirSerpIA()
     int positX=m_decor->getPosFruit().x/20.f;
     int positY=m_decor->getPosFruit().y/20.f;
 
-    tableauVirtuel[positX][positY]=FRUIT;
-
-    //affiche le tableau virtuel
-    int cmpt=0;
-
-    while(cmpt<29)
-    {
-        int cmpt2=0;
-        while(cmpt2<33)
-        {
-            std::cout<<tableauVirtuel[cmpt][cmpt2]<<"  ";
-
-            cmpt2++;
-        }
-        std::cout<<"\n";
-        cmpt++;
-    }
+    tableauVirtuel[positY][positX]=FRUIT;
 
     //**  determiner la direction a suivre   **//
 
@@ -328,7 +313,7 @@ void Controleur::changerDirSerpIA()
             {
                 if(compt2>0)
                 {
-                    if(tableauVirtuel[compt2-1][compt3]==4)
+                    if(tableauVirtuel[compt2-1][compt3]==0 || tableauVirtuel[compt2-1][compt3]==1)
                     {
                         changDirPossib=true;
                     }
@@ -336,7 +321,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt2<32)
                 {
-                    if(tableauVirtuel[compt2+1][compt3]==4)
+                    if(tableauVirtuel[compt2+1][compt3]==0 || tableauVirtuel[compt2-1][compt3]==1)
                     {
                         changDirPossib=true;
                     }
@@ -344,7 +329,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt3>0)
                 {
-                    if(tableauVirtuel[compt2][compt3-1]==4)
+                    if(tableauVirtuel[compt2][compt3-1]==0 || tableauVirtuel[compt2-1][compt3]==1)
                     {
                         changDirPossib=true;
                     }
@@ -352,7 +337,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt3<28)
                 {
-                    if(tableauVirtuel[compt2][compt3+1]==4)
+                    if(tableauVirtuel[compt2][compt3+1]==0 || tableauVirtuel[compt2-1][compt3]==1)
                     {
                         changDirPossib=true;
                     }
@@ -367,6 +352,7 @@ void Controleur::changerDirSerpIA()
 
     if(changDirPossib)
     {
+        //std::cout<<"Entree dans la condition changDirPossib"<<std::endl;
         //valeur a verifier
         int valAVerif=4;
 
@@ -436,7 +422,7 @@ void Controleur::changerDirSerpIA()
                 cmp++;
             }
 
-            int pseudoCompt=0;
+
             //boucle dans le tableau virtuel pour trouver valAVerif
             int compt3=0;
             while(compt3<29)
@@ -450,6 +436,19 @@ void Controleur::changerDirSerpIA()
                         bool dirD=false;
                         bool dirH=false;
                         bool dirB=false;
+
+                        //choix de la case active dans eCaseATester
+                        int noCaseATester=0;
+                        int commp=0;
+                        while(commp<eCasesATester.size())
+                        {
+                            if(eCasesATester.at(commp).positionX==compt3 && eCasesATester.at(commp).positionY==compt4)
+                            {
+                                noCaseATester=commp;
+                            }
+                            commp++;
+                        }
+
 
                         bool caseArrivee=false;
 
@@ -510,7 +509,9 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
                         }
                         else if(!dirG && dirD && !dirH && !dirB)
                         {
@@ -518,7 +519,9 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,1);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,1);
                         }
                         else if(!dirG && !dirD && dirH && !dirB)
                         {
@@ -526,7 +529,9 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,2);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,2);
                         }
                         else if(!dirG && !dirD && !dirH && dirB)
                         {
@@ -534,7 +539,9 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,3);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,3);
                         }
                         else if(dirG && dirD && !dirH && !dirB)
                         {
@@ -542,8 +549,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,1);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,1);
                             nChemins++;
                         }
                         else if(dirG && !dirD && dirH && !dirB)
@@ -552,8 +563,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,2);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,2);
                             nChemins++;
                         }
                         else if(dirG && !dirD && !dirH && dirB)
@@ -562,8 +577,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,3);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,3);
                             nChemins++;
                         }
                         else if(!dirG && dirD && dirH && !dirB)
@@ -572,8 +591,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,1);
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,2);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,1);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,2);
                             nChemins++;
                         }
                         else if(!dirG && dirD && !dirH && dirB)
@@ -582,8 +605,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,1);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,3);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,1);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,3);
                             nChemins++;
                         }
                         else if(!dirG && !dirD && dirH && dirB)
@@ -592,8 +619,12 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,2);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,3);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,2);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,3);
                             nChemins++;
                         }
                         else if(dirG && dirD && dirH && !dirB)
@@ -602,9 +633,15 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,1);
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+2,2);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,1);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+2,2);
                             nChemins+=2;
                         }
                         else if(dirG && dirD && !dirH && dirB)
@@ -613,9 +650,14 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,1);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+2,3);
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,1);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+2,3);
                             nChemins+=2;
                         }
                         else if(dirG && !dirD && dirH && dirB)
@@ -624,9 +666,15 @@ void Controleur::changerDirSerpIA()
                             {
                                 comptt++;
                             }
-                            insertionCase(eChemin,compt4-1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,0);
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,2);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+2,3);
+
+                            tableauVirtuel[compt3][compt4-1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4-1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,0);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,2);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+2,3);
                             nChemins+=2;
                         }
                         else if(!dirG && dirD && dirH && dirB)
@@ -636,9 +684,14 @@ void Controleur::changerDirSerpIA()
                                 comptt++;
                             }
 
-                            insertionCase(eChemin,compt4+1,compt3,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem,1);
-                            insertionCase(eChemin,compt4,compt3-1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+1,2);
-                            insertionCase(eChemin,compt4,compt3+1,valAVerif+1,eCasesATester.at(pseudoCompt).num_chem,eCasesATester.at(pseudoCompt).num_chem+2,3);
+                            tableauVirtuel[compt3][compt4+1]=valAVerif+1;
+                            insertionCase(eChemin,compt3,compt4+1,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem,1);
+
+                            tableauVirtuel[compt3-1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3-1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+1,2);
+
+                            tableauVirtuel[compt3+1][compt4]=valAVerif+1;
+                            insertionCase(eChemin,compt3+1,compt4,valAVerif+1,eCasesATester.at(noCaseATester).num_chem,eCasesATester.at(noCaseATester).num_chem+2,3);
                             nChemins+=2;
                         }
                         else if(!dirG && !dirD && !dirH && !dirB)
@@ -649,8 +702,6 @@ void Controleur::changerDirSerpIA()
                         {
 
                         }
-
-                        pseudoCompt++;
 
                     }
                     compt4++;
@@ -669,11 +720,35 @@ void Controleur::changerDirSerpIA()
 
         }
 
+        //std::cout<<"Sortie de la boucle semi infinie"<<std::endl;
+
+
+
+        /*
+        //affiche le tableau virtuel
+        int cmpt=0;
+
+        while(cmpt<29)
+        {
+            int cmpt2=0;
+            while(cmpt2<33)
+            {
+                std::cout<<tableauVirtuel[cmpt][cmpt2]<<"  ";
+
+                cmpt2++;
+            }
+            std::cout<<"\n";
+            cmpt++;
+        }
+        */
+
+
         //selection et insertion de la case d'arrivee dans eCaseChemChoisi
+        eCaseChemChoisi.clear();
         int compt3=0;
         while(compt3<eChemin.size())
         {
-            if(eChemin.at(compt3).positionX==positX && eChemin.at(compt3).positionY==positY)
+            if(eChemin.at(compt3).positionX==positY && eChemin.at(compt3).positionY==positX)
             {
                 eCaseChemChoisi.insert(eCaseChemChoisi.end(),eChemin.at(compt3));
             }
@@ -681,10 +756,14 @@ void Controleur::changerDirSerpIA()
         }
 
         //initialisation du parcours
+        //std::cout<<"initialisation du parcours"<<std::endl;
+
+        //std::cout<<"Taille chemin : "<<eChemin.size()<<std::endl;
         int pseudoCmpt=eChemin.size()-1;
         int compt4=0;
         while(compt4<eChemin.size())
         {
+            //std::cout<<"pseudoCmpt:= "<<pseudoCmpt<<std::endl;
             if(eChemin.at(pseudoCmpt).num_chem==eCaseChemChoisi.at(eCaseChemChoisi.size()-1).lien_ch_precd && eChemin.at(pseudoCmpt).valeur_chemin==eCaseChemChoisi.at(eCaseChemChoisi.size()-1).valeur_chemin-1)
             {
                 eCaseChemChoisi.insert(eCaseChemChoisi.end(),eChemin.at(pseudoCmpt));
@@ -693,35 +772,49 @@ void Controleur::changerDirSerpIA()
             compt4++;
         }
 
+        //std::cout<<"Taille chemin choisi: "<<eCaseChemChoisi.size()<<std::endl;
+        //affichage du chemin choisi
+
+
         //determiner la direction a prendre
+        //std::cout<<"determiner la direction a prendre"<<std::endl;
         int dernEl=eCaseChemChoisi.size()-1;
         if(eCaseChemChoisi.at(dernEl-1).i_d_g)
         {
+            //std::cout<<"Direction Droite"<<std::endl;
             changerDirSerp(SERPENT_2,Droite);
         }
         else if(eCaseChemChoisi.at(dernEl-1).i_d_d)
         {
+            //std::cout<<"Direction Gauche"<<std::endl;
             changerDirSerp(SERPENT_2,Gauche);
         }
         else if(eCaseChemChoisi.at(dernEl-1).i_d_h)
         {
+            //std::cout<<"Direction Bas"<<std::endl;
             changerDirSerp(SERPENT_2,Bas);
+        }
+        else if(eCaseChemChoisi.at(dernEl-1).i_d_b)
+        {
+            //std::cout<<"Direction Haut"<<std::endl;
+            changerDirSerp(SERPENT_2,Haut);
         }
         else
         {
-            changerDirSerp(SERPENT_2,Haut);
+
         }
 
 
 
     }
+    //std::cout<<"Fin fonction changer directionSerpIA"<<std::endl;
 
 
 }
 
 void Controleur::insertionCase(std::vector<CaseValable> &eChemin,int posX,int posY,int valCh,int lienChPrecd,int numCh,int mouv)
 {
-    std::vector<CaseValable> *eChmin=&eChemin;
+    //std::vector<CaseValable> *eChmin=&eChemin;
 
     CaseValable elCase;
     elCase.positionX=posX;
@@ -779,7 +872,9 @@ void Controleur::insertionCase(std::vector<CaseValable> &eChemin,int posX,int po
         elCase.i_d_b=false;
     }
 
-    eChmin->insert(eChmin->end(),elCase);
+    //eChmin->insert(eChmin->end(),elCase);
+    eChemin.insert(eChemin.end(),elCase);
+
 }
 
 
