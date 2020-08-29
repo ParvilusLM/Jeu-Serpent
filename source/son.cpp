@@ -10,6 +10,7 @@ Son::Son()
 void Son::jouerSon()
 {
     m_sonSerp.play();
+
 }
 
 Son::~Son()

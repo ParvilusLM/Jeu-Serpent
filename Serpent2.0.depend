@@ -1,9 +1,25 @@
 # depslib dependency file v1.0
-1598505934 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\main.cpp
-	<iostream>
+1598665024 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\decor.cpp
+	"decor.h"
+
+1598665024 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\decor.h
+	"serpent.h"
+	"son.h"
+	"info.h"
+	"menu.h"
+	"enums.h"
+	"varG.h"
+	"constantes.h"
+
+1598402267 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\serpent.h
 	<SFML/Graphics.hpp>
-	<ctime>
-	"controleur.h"
+	"varG.h"
+	"constantes.h"
+	"enums.h"
+	<iostream>
+	"enums.h"
+	"varG.h"
+	"constantes.h"
 
 1525815618 c:\program files (x86)\codeblocks\sfml-2.5.1\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -414,59 +430,12 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1598563927 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\controleur.cpp
-	"controleur.h"
-
-1588730976 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\decor.cpp
-	"decor.h"
-
-1588900942 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\info.cpp
-	"info.h"
-
-1598402650 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\serpent.cpp
-	"serpent.h"
-
-1588903419 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\son.cpp
-	"son.h"
-
-1589247881 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\menu.cpp
-	"menu.h"
-
-1586573353 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\menu.h
-	<SFML/Graphics.hpp>
-	"varG.h"
-	"constantes.h"
-	"enums.h"
-	<sstream>
-
 1598402407 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\varg.h
 
 1587165748 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\constantes.h
 
 1598051919 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\enums.h
 	<SFML/Graphics.hpp>
-
-1598402267 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\serpent.h
-	<SFML/Graphics.hpp>
-	"varG.h"
-	"constantes.h"
-	"enums.h"
-	<iostream>
-	"enums.h"
-	"varG.h"
-	"constantes.h"
-
-1598566347 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\controleur.h
-	"decor.h"
-
-1588730976 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\decor.h
-	"serpent.h"
-	"son.h"
-	"info.h"
-	"menu.h"
-	"enums.h"
-	"varG.h"
-	"constantes.h"
 
 1588903420 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\son.h
 	<SFML/Graphics.hpp>
@@ -584,4 +553,36 @@
 	"enums.h"
 	"varG.h"
 	"constantes.h"
+
+1586573353 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\menu.h
+	<SFML/Graphics.hpp>
+	"varG.h"
+	"constantes.h"
+	"enums.h"
+	<sstream>
+
+1588900942 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\info.cpp
+	"info.h"
+
+1598660945 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+	<ctime>
+	"controleur.h"
+	<SFML/System/Thread.hpp>
+
+1598566347 c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\controleur.h
+	"decor.h"
+
+1589247881 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\menu.cpp
+	"menu.h"
+
+1598402650 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\serpent.cpp
+	"serpent.h"
+
+1598658913 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\son.cpp
+	"son.h"
+
+1598665084 source:c:\users\my foe\documents\programmation projets\sfml\version 2.0\proj snake\serpent2.0\source\controleur.cpp
+	"controleur.h"
 

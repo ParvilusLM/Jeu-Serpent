@@ -1,6 +1,6 @@
 #include "decor.h"
 
-Decor::Decor(sf::RenderWindow& fenetre):m_fenetre(0),m_son(0),m_serpent(0),m_info(0),m_menu(0)
+Decor::Decor(sf::RenderWindow& fenetre):m_fenetre(0),m_serpent(0),m_info(0),m_menu(0)
 {
     m_fenetre=&fenetre;
 
@@ -35,6 +35,7 @@ Son& Decor::getSon()
 {
     return *m_son;
 }
+
 
 Menu& Decor::getMenu()
 {

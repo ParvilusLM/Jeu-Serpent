@@ -455,7 +455,7 @@ void Controleur::changerDirSerpIA()
                         //condition pour savoir que la direction est valide
                         if(compt4>0) //dirG
                         {
-                            if(tableauVirtuel[compt3][compt4-1]==0 || tableauVirtuel[compt3][compt4-1]==1)
+                            if(tableauVirtuel[compt3][compt4-1]==0 || tableauVirtuel[compt3][compt4-1]==1 || tableauVirtuel[compt3][compt4-1]>valAVerif+1)
                             {
                                 if(tableauVirtuel[compt3][compt4-1]==1)
                                 {
@@ -467,7 +467,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt4<32) //dirD
                         {
-                            if(tableauVirtuel[compt3][compt4+1]==0 || tableauVirtuel[compt3][compt4+1]==1)
+                            if(tableauVirtuel[compt3][compt4+1]==0 || tableauVirtuel[compt3][compt4+1]==1 || tableauVirtuel[compt3][compt4+1]>valAVerif+1)
                             {
                                 if(tableauVirtuel[compt3][compt4+1]==1)
                                 {
@@ -479,7 +479,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3>0) //dirH
                         {
-                            if(tableauVirtuel[compt3-1][compt4]==0 || tableauVirtuel[compt3-1][compt4]==1)
+                            if(tableauVirtuel[compt3-1][compt4]==0 || tableauVirtuel[compt3-1][compt4]==1 || tableauVirtuel[compt3-1][compt4]>valAVerif+1)
                             {
                                 if(tableauVirtuel[compt3-1][compt4]==1)
                                 {
@@ -491,7 +491,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3<28) //dirB
                         {
-                            if(tableauVirtuel[compt3+1][compt4]==0 || tableauVirtuel[compt3+1][compt4]==1)
+                            if(tableauVirtuel[compt3+1][compt4]==0 || tableauVirtuel[compt3+1][compt4]==1 || tableauVirtuel[compt3+1][compt4]>valAVerif+1)
                             {
                                 if(tableauVirtuel[compt3+1][compt4]==1)
                                 {
@@ -756,7 +756,7 @@ void Controleur::changerDirSerpIA()
         }
 
         //initialisation du parcours
-        //std::cout<<"initialisation du parcours"<<std::endl;
+        std::cout<<"initialisation du parcours"<<std::endl;
 
         //std::cout<<"Taille chemin : "<<eChemin.size()<<std::endl;
         int pseudoCmpt=eChemin.size()-1;
@@ -777,7 +777,7 @@ void Controleur::changerDirSerpIA()
 
 
         //determiner la direction a prendre
-        //std::cout<<"determiner la direction a prendre"<<std::endl;
+        std::cout<<"determiner la direction a prendre"<<std::endl;
         int dernEl=eCaseChemChoisi.size()-1;
         if(eCaseChemChoisi.at(dernEl-1).i_d_g)
         {

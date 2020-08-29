@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <ctime>
 #include "controleur.h"
+#include <SFML/System/Thread.hpp>
 
 
 
@@ -21,9 +22,11 @@ int main()
 {
     srand(time(0));
     RenderWindow fenetre(VideoMode(700,700),"Serpent");
-    fenetre.setVerticalSyncEnabled(true);
+    fenetre.setFramerateLimit(60);
+
 
     Controleur controleurJ(fenetre);
+    sf::Thread threadIA(&Controleur::changerDirSerpIA,&controleurJ);
 
     Clock horloge;
     float timer=0, delai=0.2;
@@ -123,11 +126,6 @@ int main()
                 controleurJ.changerDirSerp(SERPENT_2, Droite);
             }
 
-            if(jeuEnCours && !HumvsHum)
-            {
-
-            }
-
         }
 
         //gestions des donnnees du jeu
@@ -139,7 +137,13 @@ int main()
             if(timer>delai && !jeuPause)
             {
                 timer=0;
-                controleurJ.changerDirSerpIA();
+
+                if(!HumvsHum)
+                {
+                    threadIA.launch();
+                }
+
+                //controleurJ.changerDirSerpIA();
                 controleurJ.mouvementSerp();
                 controleurJ.collisionSerp();
 
