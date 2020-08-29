@@ -19,7 +19,6 @@ public:
     void ajouteFruit();
     void collisionSerp();
     bool Collision(FloatRect boiteE_obj1,FloatRect boiteE_obj2);
-    void insertionCase(std::vector<CaseValable> &eChemin,int posX,int posY,int valCh,int lienChPrecd,int numCh,int mouv);
 
     void debutJeu();
     void retourMenu();
