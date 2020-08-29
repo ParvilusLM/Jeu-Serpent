@@ -116,9 +116,6 @@ void Serpent::mouvementSerpent(int no_serp)
         m_serpent.at(no_serp).at(0).el_spr.move(0,m_mouvY);
     }
 
-
-
-
 }
 
 void Serpent::ajouteNPDS(int no_serp)

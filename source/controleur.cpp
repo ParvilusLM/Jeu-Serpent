@@ -253,7 +253,7 @@ void Controleur::pauseJeu()
 
 void Controleur::changerDirSerpIA()
 {
-    //std::cout<<"Debut fonction changer directionSerpIA"<<std::endl;
+    std::cout<<"Debut fonction changer directionSerpIA"<<std::endl;
 
     //initialisation du tableau virtuel
     int tableauVirtuel[29][33]={0};
@@ -263,8 +263,8 @@ void Controleur::changerDirSerpIA()
         int compt2=0;
         while(compt2<m_decor->getSerpent().getVectSerpents().at(compt).size())
         {
-            int positX=m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().x/20.f;
-            int positY=m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().y/20.f;
+            int positX=((m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().x+10)/20)-2;
+            int positY=((m_decor->getSerpent().getVectSerpents().at(compt).at(compt2).el_spr.getPosition().y+10)/20)-6;
 
             if(compt==0 && compt2==0)
             {
@@ -286,8 +286,8 @@ void Controleur::changerDirSerpIA()
 
     }
 
-    int positX=m_decor->getPosFruit().x/20.f;
-    int positY=m_decor->getPosFruit().y/20.f;
+    int positX=((m_decor->getPosFruit().x+10)/20)-2;
+    int positY=((m_decor->getPosFruit().y+10)/20)-6;
 
     tableauVirtuel[positY][positX]=FRUIT;
 
@@ -303,9 +303,9 @@ void Controleur::changerDirSerpIA()
         {
             if(tableauVirtuel[compt2][compt3]==4)
             {
-                if(compt2>0)
+                if(compt3>0)
                 {
-                    if(tableauVirtuel[compt2-1][compt3]==0 || tableauVirtuel[compt2-1][compt3]==1)
+                    if(tableauVirtuel[compt2][compt3-1]==VIDE || tableauVirtuel[compt2][compt3-1]==FRUIT)
                     {
                         changDirPossib=true;
                     }
@@ -313,7 +313,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt2<32)
                 {
-                    if(tableauVirtuel[compt2+1][compt3]==0 || tableauVirtuel[compt2-1][compt3]==1)
+                    if(tableauVirtuel[compt2][compt3+1]==VIDE || tableauVirtuel[compt2][compt3+1]==FRUIT)
                     {
                         changDirPossib=true;
                     }
@@ -321,7 +321,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt3>0)
                 {
-                    if(tableauVirtuel[compt2][compt3-1]==0 || tableauVirtuel[compt2-1][compt3]==1)
+                    if(tableauVirtuel[compt2-1][compt3]==VIDE || tableauVirtuel[compt2-1][compt3]==FRUIT)
                     {
                         changDirPossib=true;
                     }
@@ -329,7 +329,7 @@ void Controleur::changerDirSerpIA()
 
                 if(compt3<28)
                 {
-                    if(tableauVirtuel[compt2][compt3+1]==0 || tableauVirtuel[compt2-1][compt3]==1)
+                    if(tableauVirtuel[compt2+1][compt3]==VIDE || tableauVirtuel[compt2+1][compt3]==FRUIT)
                     {
                         changDirPossib=true;
                     }
@@ -344,12 +344,12 @@ void Controleur::changerDirSerpIA()
 
     if(changDirPossib)
     {
-        //std::cout<<"Entree dans la condition changDirPossib"<<std::endl;
+        std::cout<<"Entree dans la condition changDirPossib"<<std::endl;
         //valeur a verifier
         int valAVerif=4;
 
         //variables pour connaitre le nombre de chemins
-        int nChemins=0;
+        int nChemins=1;
         int nCheminsTerm=0;
 
         //
@@ -377,7 +377,7 @@ void Controleur::changerDirSerpIA()
                         //condition pour savoir que la direction est valide
                         if(compt4>0) //dirG
                         {
-                            if(tableauVirtuel[compt3][compt4-1]==0 || tableauVirtuel[compt3][compt4-1]==1)
+                            if(tableauVirtuel[compt3][compt4-1]==VIDE || tableauVirtuel[compt3][compt4-1]==FRUIT)
                             {
                                 if(tableauVirtuel[compt3][compt4-1]==1)
                                 {
@@ -389,7 +389,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt4<32) //dirD
                         {
-                            if(tableauVirtuel[compt3][compt4+1]==0 || tableauVirtuel[compt3][compt4+1]==1)
+                            if(tableauVirtuel[compt3][compt4+1]==VIDE || tableauVirtuel[compt3][compt4+1]==FRUIT)
                             {
                                 if(tableauVirtuel[compt3][compt4+1]==1)
                                 {
@@ -401,7 +401,7 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3>0) //dirH
                         {
-                            if(tableauVirtuel[compt3-1][compt4]==0 || tableauVirtuel[compt3-1][compt4]==1)
+                            if(tableauVirtuel[compt3-1][compt4]==VIDE || tableauVirtuel[compt3-1][compt4]==FRUIT)
                             {
                                 if(tableauVirtuel[compt3-1][compt4]==1)
                                 {
@@ -413,9 +413,9 @@ void Controleur::changerDirSerpIA()
 
                         if(compt3<28) //dirB
                         {
-                            if(tableauVirtuel[compt3+1][compt4]==0 || tableauVirtuel[compt3+1][compt4]==1)
+                            if(tableauVirtuel[compt3+1][compt4]==VIDE || tableauVirtuel[compt3+1][compt4]==FRUIT)
                             {
-                                if(tableauVirtuel[compt3+1][compt4]==1)
+                                if(tableauVirtuel[compt3+1][compt4]==FRUIT)
                                 {
                                     caseArrivee=true;
                                 }
@@ -644,6 +644,7 @@ void Controleur::changerDirSerpIA()
 
 
 
+        /*
 
         //affiche le tableau virtuel
         int cmpt=0;
@@ -660,9 +661,8 @@ void Controleur::changerDirSerpIA()
             std::cout<<"\n";
             cmpt++;
         }
+        */
 
-
-        std::cout<<"\n \n"<<std::endl;
 
         //selection et insertion de la case d'arrivee
         sf::Vector2i positionActuel;
@@ -674,7 +674,8 @@ void Controleur::changerDirSerpIA()
         positionActuel.x=positY;
         positionActuel.y=positX;
 
-        int valeurActuel=tableauVirtuel[positY][positX];
+
+        int valeurActuel=tableauVirtuel[positionActuel.x][positionActuel.y];
 
         //initialisation du parcours
         std::cout<<"initialisation du parcours"<<std::endl;
@@ -686,123 +687,52 @@ void Controleur::changerDirSerpIA()
             directionH=false;
             directionB=false;
 
-            int commpt2=0;
-            while(commpt2<29)
+            if(tableauVirtuel[positionActuel.x][positionActuel.y-1]==valeurActuel-1)
             {
-                int commpt3=0;
-                while(commpt3<33)
-                {
-                    if(commpt2==positionActuel.x && commpt3==positionActuel.y)
-                    {
-                        if(commpt3>0)
-                        {
-                            if(tableauVirtuel[commpt2][commpt3-1]==valeurActuel-1)
-                            {
-                                directionG=true;
-                            }
-                        }
-
-                        if(commpt3<32)
-                        {
-                            if(tableauVirtuel[commpt2][commpt3+1]==valeurActuel-1)
-                            {
-                                directionD=true;
-                            }
-
-                        }
-
-                        if(commpt2>0)
-                        {
-                            if(tableauVirtuel[commpt2-1][commpt3]==valeurActuel-1)
-                            {
-                                directionH=true;
-                            }
-                        }
-
-                        if(commpt2<32)
-                        {
-                            if(tableauVirtuel[commpt2+1][commpt3]==valeurActuel-1)
-                            {
-                                directionB=true;
-                            }
-                        }
-
-                        if(directionG)
-                        {
-                            valeurActuel--;
-
-                            if(valeurActuel==4)
-                            {
-                                commpt++;
-                            }
-                            positionActuel.x=commpt2;
-                            positionActuel.y=commpt3-1;
-
-                            directionD=false;
-                            directionH=false;
-                            directionB=false;
-                        }
-                        else if(directionD)
-                        {
-                            valeurActuel--;
-
-                            if(valeurActuel==4)
-                            {
-                                commpt++;
-                            }
-                            positionActuel.x=commpt2;
-                            positionActuel.y=commpt3+1;
-
-                            directionG=false;
-                            directionH=false;
-                            directionB=false;
-                        }
-                        else if(directionH)
-                        {
-                            valeurActuel--;
-
-                            if(valeurActuel==4)
-                            {
-                                commpt++;
-                            }
-                            positionActuel.x=commpt2-1;
-                            positionActuel.y=commpt3;
-
-                            directionG=false;
-                            directionD=false;
-                            directionB=false;
-                        }
-                        else if(directionB)
-                        {
-                            valeurActuel--;
-
-                            if(valeurActuel==4)
-                            {
-                                commpt++;
-                            }
-                            positionActuel.x=commpt2+1;
-                            positionActuel.y=commpt3;
-
-                            directionG=false;
-                            directionD=false;
-                            directionH=false;
-                        }
-                        else
-                        {
-
-                        }
-
-
-
-                    }
-                    commpt3++;
-                }
-                commpt2++;
+                directionG=true;
             }
+            else if(tableauVirtuel[positionActuel.x][positionActuel.y+1]==valeurActuel-1)
+            {
+                directionD=true;
+            }
+            else if(tableauVirtuel[positionActuel.x-1][positionActuel.y]==valeurActuel-1)
+            {
+                directionH=true;
+            }
+            else
+            {
+                directionB=true;
+            }
+
+
+            if(directionG)
+            {
+                valeurActuel--;
+                positionActuel.y--;
+            }
+            else if(directionD)
+            {
+                valeurActuel--;
+                positionActuel.y++;
+            }
+            else if(directionH)
+            {
+                valeurActuel--;
+                positionActuel.x--;
+            }
+            else
+            {
+                valeurActuel--;
+                positionActuel.x++;
+            }
+
+            if(valeurActuel==4)
+            {
+                commpt++;
+            }
+
+
         }
-
-        //std::cout<<"Taille chemin : "<<eChemin.size()<<std::endl;
-
 
 
         //determiner la direction a prendre
@@ -822,16 +752,14 @@ void Controleur::changerDirSerpIA()
             //std::cout<<"Direction Bas"<<std::endl;
             changerDirSerp(SERPENT_2,Bas);
         }
-        else if(directionB)
+        else
         {
             //std::cout<<"Direction Haut"<<std::endl;
             changerDirSerp(SERPENT_2,Haut);
         }
-        else
-        {
 
-        }
 
+        std::cout<<directionG<<" : "<<directionD<<" : "<<directionH<<" : "<<directionB<<std::endl;
 
 
     }

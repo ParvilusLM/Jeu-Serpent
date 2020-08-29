@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <ctime>
 #include "controleur.h"
-#include <SFML/System/Thread.hpp>
+
 
 
 
@@ -26,7 +26,6 @@ int main()
 
 
     Controleur controleurJ(fenetre);
-    sf::Thread threadIA(&Controleur::changerDirSerpIA,&controleurJ);
 
     Clock horloge;
     float timer=0, delai=0.2;
@@ -140,10 +139,9 @@ int main()
 
                 if(!HumvsHum)
                 {
-                    threadIA.launch();
+                    controleurJ.changerDirSerpIA();
                 }
 
-                //controleurJ.changerDirSerpIA();
                 controleurJ.mouvementSerp();
                 controleurJ.collisionSerp();
 
