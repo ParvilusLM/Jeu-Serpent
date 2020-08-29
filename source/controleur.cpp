@@ -253,8 +253,6 @@ void Controleur::pauseJeu()
 
 void Controleur::changerDirSerpIA()
 {
-    std::cout<<"Debut fonction changer directionSerpIA"<<std::endl;
-
     //initialisation du tableau virtuel
     int tableauVirtuel[29][33]={0};
     int compt=0;
@@ -344,7 +342,6 @@ void Controleur::changerDirSerpIA()
 
     if(changDirPossib)
     {
-        std::cout<<"Entree dans la condition changDirPossib"<<std::endl;
         //valeur a verifier
         int valAVerif=4;
 
@@ -640,29 +637,6 @@ void Controleur::changerDirSerpIA()
 
         }
 
-        //std::cout<<"Sortie de la boucle semi infinie"<<std::endl;
-
-
-
-        /*
-
-        //affiche le tableau virtuel
-        int cmpt=0;
-
-        while(cmpt<29)
-        {
-            int cmpt2=0;
-            while(cmpt2<33)
-            {
-                std::cout<<tableauVirtuel[cmpt][cmpt2]<<"  ";
-
-                cmpt2++;
-            }
-            std::cout<<"\n";
-            cmpt++;
-        }
-        */
-
 
         //selection et insertion de la case d'arrivee
         sf::Vector2i positionActuel;
@@ -678,7 +652,6 @@ void Controleur::changerDirSerpIA()
         int valeurActuel=tableauVirtuel[positionActuel.x][positionActuel.y];
 
         //initialisation du parcours
-        std::cout<<"initialisation du parcours"<<std::endl;
         int commpt=0;
         while(commpt<1)
         {
@@ -731,12 +704,10 @@ void Controleur::changerDirSerpIA()
                 commpt++;
             }
 
-
         }
 
-
         //determiner la direction a prendre
-        std::cout<<"determiner la direction a prendre"<<std::endl;
+
         if(directionG)
         {
             //std::cout<<"Direction Droite"<<std::endl;
@@ -758,13 +729,7 @@ void Controleur::changerDirSerpIA()
             changerDirSerp(SERPENT_2,Haut);
         }
 
-
-        std::cout<<directionG<<" : "<<directionD<<" : "<<directionH<<" : "<<directionB<<std::endl;
-
-
     }
-    //std::cout<<"Fin fonction changer directionSerpIA"<<std::endl;
-
 
 }
 
