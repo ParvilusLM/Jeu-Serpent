@@ -17,15 +17,23 @@ public:
     void initMenuNP();
     void initMenuI();
     void initMenuAp();
+    void initMenuPause();
+    void initMenuFinPart();
+
     void afficheMenuP();
     void afficheMenuNP();
     void afficheMenuI();
     void afficheMenuAp();
-    void affficheMenu();
+    void afficheMenuPause();
+    void afficheMenuFinPart();
+    void afficheMenu();
+
     void elementActif();
     void selectionElActif();
     void retourMenuP();
     bool collisionTS(sf::FloatRect elem);
+
+    void setTypeMenu(int menuActuel);
     TypeJeu getTypeJeu();
     void quitterJeu();
 
@@ -68,6 +76,17 @@ private:
 
     sf::Text m_txtMAP;
     std::ostringstream m_stream_txtMAP;
+
+    //pour menu pause
+    sf::Texture m_tMenuPause;
+    sf::Sprite m_sMenuPause;
+
+    //pour menu fin Partie
+    sf::Texture m_tMenuFinP;
+    sf::Sprite m_sMenuFinP;
+
+//boites engl des boutons
+    sf::FloatRect boiteEBPR,boiteEBPI,boiteEBPQ,boiteEBFQ,boiteEBFR;
 
 
 

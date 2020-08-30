@@ -13,6 +13,10 @@ using namespace sf;
 bool jeuEnCours=false;
 bool HumvsHum=false;
 bool jeuPause=false;
+bool jeuFinPartie=false;
+bool jeuDebut=false;
+bool jeuRejouer=false;
+
 int sourisX=0,sourisY=0;
 
 
@@ -54,11 +58,20 @@ int main()
             {
                 sourisX=evenement.mouseMove.x;
                 sourisY=evenement.mouseMove.y;
+
                 if(!jeuEnCours)
                 {
                     controleurJ.gestionDplSouris();
                 }
+
+                if(jeuEnCours && jeuPause)
+                {
+                    controleurJ.gestionDplSouris();
+                }
+
+
             }
+
 
             if(evenement.type==Event::MouseButtonPressed && !jeuEnCours)
             {
@@ -73,6 +86,15 @@ int main()
                           controleurJ.debutJeu();
 
                       }
+                  }
+            }
+
+            if(evenement.type==Event::MouseButtonPressed && jeuEnCours && jeuPause)
+            {
+                  Mouse::Button button = evenement.mouseButton.button;
+                  if (button == Mouse::Left) // Bouton gauche
+                  {
+                      controleurJ.gestionSelectionSouris();
                   }
             }
 
@@ -153,8 +175,10 @@ int main()
                     controleurJ.changerDirSerpIA();
                 }
 
-                controleurJ.mouvementSerp();
-                controleurJ.collisionSerp();
+                controleurJ.gestMajDonnees();
+
+                //controleurJ.mouvementSerp();
+                //controleurJ.collisionSerp();
 
                 interdictionDpl1=false;
                 interdictionDpl2=false;
@@ -173,6 +197,10 @@ int main()
         if(jeuEnCours)
         {
             controleurJ.afficheJeu();
+            if(jeuPause)
+            {
+                controleurJ.afficheMenu();
+            }
         }
         else
         {

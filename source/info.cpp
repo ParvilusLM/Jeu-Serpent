@@ -56,10 +56,6 @@ void Info::afficheInfo()
     m_fenetre->draw(m_txtScoreJ2);
 
 
-    if(jeuPause)
-    {
-        m_fenetre->draw(m_txtPause);
-    }
 }
 
 void Info::indiquerScore()

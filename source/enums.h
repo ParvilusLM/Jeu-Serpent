@@ -33,7 +33,12 @@ enum TypeMenu
     MenuPrincipal,
     MenuNvlPartie,
     MenuInstructions,
-    MenuApropos
+    MenuInstructions1,
+    MenuInstructions2,
+    MenuInstructions3,
+    MenuApropos,
+    MenuPause,
+    MenuFinPartie
 };
 
 enum TypeJeu
@@ -51,7 +56,12 @@ enum
     Q_ACTIF,
     JHvsH_ACTIF,
     JHvsIA_ACTIF,
-    R_ACTIF
+    R_ACTIF,
+    PAUSER_ACTIF,
+    PAUSEI_ACTIF,
+    PAUSEQ_ACTIF,
+    FINPQ_ACTIF,
+    FINPR_ACTIF
 };
 
 enum

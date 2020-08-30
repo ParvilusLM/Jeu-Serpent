@@ -29,6 +29,8 @@ public:
 
     void changerDirSerpIA();
 
+    void gestMajDonnees();
+
 
 
 private:

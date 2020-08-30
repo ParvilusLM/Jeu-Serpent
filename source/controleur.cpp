@@ -10,7 +10,7 @@ Controleur::Controleur(sf::RenderWindow &fenetre):m_fenetre(0),m_decor(0)
 
 void Controleur::afficheMenu()
 {
-    m_decor->getMenu().affficheMenu();
+    m_decor->getMenu().afficheMenu();
 }
 
 void Controleur::afficheSerp()
@@ -106,22 +106,26 @@ void Controleur::collisionSerp()
     if(m_decor->getSerpent().getVectSerpents().at(0).at(0).el_spr.getPosition().x < 20.f || m_decor->getSerpent().getVectSerpents().at(0).at(0).el_spr.getPosition().x > 680.f)
     {
         jeuPause=true;
+        m_decor->getMenu().setTypeMenu(MenuFinPartie);
     }
 
     if(m_decor->getSerpent().getVectSerpents().at(0).at(0).el_spr.getPosition().y < 100.f || m_decor->getSerpent().getVectSerpents().at(0).at(0).el_spr.getPosition().y > 680.f)
     {
         jeuPause=true;
+        m_decor->getMenu().setTypeMenu(MenuFinPartie);
     }
 
     //serpent 2
     if(m_decor->getSerpent().getVectSerpents().at(1).at(0).el_spr.getPosition().x < 20.f || m_decor->getSerpent().getVectSerpents().at(1).at(0).el_spr.getPosition().x > 680.f)
     {
         jeuPause=true;
+        m_decor->getMenu().setTypeMenu(MenuFinPartie);
     }
 
     if(m_decor->getSerpent().getVectSerpents().at(1).at(0).el_spr.getPosition().y < 100.f || m_decor->getSerpent().getVectSerpents().at(1).at(0).el_spr.getPosition().y > 680.f)
     {
         jeuPause=true;
+        m_decor->getMenu().setTypeMenu(MenuFinPartie);
     }
 
 
@@ -163,6 +167,7 @@ void Controleur::collisionSerp()
                 if(m_decor->getSerpent().getVectSerpents().at(compt2).at(0).el_spr.getGlobalBounds() == m_decor->getSerpent().getVectSerpents().at(compt2).at(compt3).el_spr.getGlobalBounds())
                 {
                    jeuPause=true;
+                   m_decor->getMenu().setTypeMenu(MenuFinPartie);
 
                 }
 
@@ -188,6 +193,7 @@ void Controleur::collisionSerp()
             if(m_decor->getSerpent().getVectSerpents().at(compt2).at(0).el_spr.getGlobalBounds() == m_decor->getSerpent().getVectSerpents().at(serp_opp).at(compt4).el_spr.getGlobalBounds() )
             {
                 jeuPause=true;
+                m_decor->getMenu().setTypeMenu(MenuFinPartie);
             }
 
             compt4++;
@@ -246,9 +252,13 @@ void Controleur::pauseJeu()
     if(jeuPause)
     {
         jeuPause=false;
+
     }
     else
+    {
         jeuPause=true;
+        m_decor->getMenu().setTypeMenu(MenuPause);
+    }
 }
 
 void Controleur::changerDirSerpIA()
@@ -749,6 +759,16 @@ void Controleur::changerDirSerpIA()
 
 }
 
+void Controleur::gestMajDonnees()
+{
+    if(jeuRejouer)
+    {
+        debutJeu();
+        jeuRejouer=false;
+    }
+    mouvementSerp();
+    collisionSerp();
+}
 
 Controleur::~Controleur()
 {
