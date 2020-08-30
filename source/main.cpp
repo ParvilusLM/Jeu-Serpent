@@ -30,6 +30,7 @@ int main()
     Clock horloge;
     float timer=0, delai=0.2;
 
+    bool interdictionDpl1=false,interdictionDpl2=false;
 
 
     while(fenetre.isOpen())
@@ -85,44 +86,54 @@ int main()
                 controleurJ.finJeu();
             }
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)  && jeuEnCours && !jeuPause)
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)  && jeuEnCours && !jeuPause && !interdictionDpl1)
             {
                 controleurJ.changerDirSerp(SERPENT_1, Haut);
+                interdictionDpl1=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && jeuEnCours && !jeuPause)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && jeuEnCours && !jeuPause && !interdictionDpl1)
             {
                 controleurJ.changerDirSerp(SERPENT_1, Bas);
+                interdictionDpl1=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && jeuEnCours && !jeuPause)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && jeuEnCours && !jeuPause && !interdictionDpl1)
             {
                 controleurJ.changerDirSerp(SERPENT_1, Gauche);
+                interdictionDpl1=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && jeuEnCours && !jeuPause)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && jeuEnCours && !jeuPause && !interdictionDpl1)
             {
                 controleurJ.changerDirSerp(SERPENT_1, Droite);
+                interdictionDpl1=true;
+            }
+            else
+            {
+
             }
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8) && jeuEnCours && !jeuPause && HumvsHum)
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8) && jeuEnCours && !jeuPause && HumvsHum && !interdictionDpl2)
             {
                 controleurJ.changerDirSerp(SERPENT_2, Haut);
+                interdictionDpl2=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2) && jeuEnCours && !jeuPause && HumvsHum)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2) && jeuEnCours && !jeuPause && HumvsHum && !interdictionDpl2)
             {
                 controleurJ.changerDirSerp(SERPENT_2, Bas);
+                interdictionDpl2=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4) && jeuEnCours && !jeuPause && HumvsHum)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4) && jeuEnCours && !jeuPause && HumvsHum && !interdictionDpl2)
             {
                 controleurJ.changerDirSerp(SERPENT_2, Gauche);
+                interdictionDpl2=true;
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad6) && jeuEnCours && !jeuPause && HumvsHum)
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad6) && jeuEnCours && !jeuPause && HumvsHum && !interdictionDpl2)
             {
                 controleurJ.changerDirSerp(SERPENT_2, Droite);
+                interdictionDpl2=true;
+            }
+            else
+            {
+
             }
 
         }
@@ -144,6 +155,9 @@ int main()
 
                 controleurJ.mouvementSerp();
                 controleurJ.collisionSerp();
+
+                interdictionDpl1=false;
+                interdictionDpl2=false;
 
             }
         }

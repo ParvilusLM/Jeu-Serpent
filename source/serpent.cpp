@@ -100,20 +100,21 @@ void Serpent::mouvementSerpent(int no_serp)
     {
         m_serpent.at(no_serp).at(0).el_spr.move(-m_mouvX,0);
     }
-
-    if(m_dirSerp.at(no_serp).dir_s_d)
+    else if(m_dirSerp.at(no_serp).dir_s_d)
     {
         m_serpent.at(no_serp).at(0).el_spr.move(m_mouvX,0);
     }
-
-    if(m_dirSerp.at(no_serp).dir_s_h)
+    else if(m_dirSerp.at(no_serp).dir_s_h)
     {
         m_serpent.at(no_serp).at(0).el_spr.move(0,-m_mouvY);
     }
-
-    if(m_dirSerp.at(no_serp).dir_s_b)
+    else if(m_dirSerp.at(no_serp).dir_s_b)
     {
         m_serpent.at(no_serp).at(0).el_spr.move(0,m_mouvY);
+    }
+    else
+    {
+
     }
 
 }
@@ -392,7 +393,7 @@ void Serpent::setDirectSerp(int no_serp, int dirSerp)
 
     if(possib)
     {
-        m_dirSerp.at(no_serp).dir_s_b=false;
+       m_dirSerp.at(no_serp).dir_s_b=false;
        m_dirSerp.at(no_serp).dir_s_h=false;
        m_dirSerp.at(no_serp).dir_s_g=false;
        m_dirSerp.at(no_serp).dir_s_d=false;
@@ -401,18 +402,15 @@ void Serpent::setDirectSerp(int no_serp, int dirSerp)
        {
           m_dirSerp.at(no_serp).dir_s_h=true;
        }
-
-       if(dirSerp==Bas)
+       else if(dirSerp==Bas)
        {
            m_dirSerp.at(no_serp).dir_s_b=true;
        }
-
-       if(dirSerp==Gauche)
+       else if(dirSerp==Gauche)
        {
            m_dirSerp.at(no_serp).dir_s_g=true;
        }
-
-       if(dirSerp==Droite)
+       else if(dirSerp==Droite)
        {
            m_dirSerp.at(no_serp).dir_s_d=true;
        }

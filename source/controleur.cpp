@@ -660,21 +660,36 @@ void Controleur::changerDirSerpIA()
             directionH=false;
             directionB=false;
 
-            if(tableauVirtuel[positionActuel.x][positionActuel.y-1]==valeurActuel-1)
+            if(positionActuel.y>0)
             {
-                directionG=true;
+                if(tableauVirtuel[positionActuel.x][positionActuel.y-1]==valeurActuel-1)
+                {
+                    directionG=true;
+                }
             }
-            else if(tableauVirtuel[positionActuel.x][positionActuel.y+1]==valeurActuel-1)
+
+            if(positionActuel.y<32)
             {
-                directionD=true;
+                if(tableauVirtuel[positionActuel.x][positionActuel.y+1]==valeurActuel-1)
+                {
+                    directionD=true;
+                }
             }
-            else if(tableauVirtuel[positionActuel.x-1][positionActuel.y]==valeurActuel-1)
+
+            if(positionActuel.x>0)
             {
-                directionH=true;
+                if(tableauVirtuel[positionActuel.x-1][positionActuel.y]==valeurActuel-1)
+                {
+                    directionH=true;
+                }
             }
-            else
+
+            if(positionActuel.x<28)
             {
-                directionB=true;
+                if(tableauVirtuel[positionActuel.x+1][positionActuel.y]==valeurActuel-1)
+                {
+                    directionB=true;
+                }
             }
 
 
@@ -698,6 +713,7 @@ void Controleur::changerDirSerpIA()
                 valeurActuel--;
                 positionActuel.x++;
             }
+
 
             if(valeurActuel==4)
             {
