@@ -359,6 +359,9 @@ void Controleur::changerDirSerpIA()
         int nChemins=1;
         int nCheminsTerm=0;
 
+        bool arriveeSurFruit=false;
+        sf::Vector2i positionSec;
+
         //
         int comptt=0;
         while(comptt<1)
@@ -389,6 +392,7 @@ void Controleur::changerDirSerpIA()
                                 if(tableauVirtuel[compt3][compt4-1]==1)
                                 {
                                     caseArrivee=true;
+                                    arriveeSurFruit=caseArrivee;
                                 }
                                 dirG=true;
                             }
@@ -401,6 +405,7 @@ void Controleur::changerDirSerpIA()
                                 if(tableauVirtuel[compt3][compt4+1]==1)
                                 {
                                     caseArrivee=true;
+                                    arriveeSurFruit=caseArrivee;
                                 }
                                 dirD=true;
                             }
@@ -413,6 +418,7 @@ void Controleur::changerDirSerpIA()
                                 if(tableauVirtuel[compt3-1][compt4]==1)
                                 {
                                     caseArrivee=true;
+                                    arriveeSurFruit=caseArrivee;
                                 }
                                 dirH=true;
                             }
@@ -425,6 +431,7 @@ void Controleur::changerDirSerpIA()
                                 if(tableauVirtuel[compt3+1][compt4]==FRUIT)
                                 {
                                     caseArrivee=true;
+                                    arriveeSurFruit=caseArrivee;
                                 }
                                 dirB=true;
                             }
@@ -624,6 +631,8 @@ void Controleur::changerDirSerpIA()
                         else if(!dirG && !dirD && !dirH && !dirB)
                         {
                             nCheminsTerm++;
+                            positionSec.x=compt3;
+                            positionSec.y=compt4;
                         }
                         else
                         {
@@ -655,8 +664,16 @@ void Controleur::changerDirSerpIA()
         bool directionH=false;
         bool directionB=false;
 
-        positionActuel.x=positY;
-        positionActuel.y=positX;
+        if(arriveeSurFruit)
+        {
+            positionActuel.x=positY;
+            positionActuel.y=positX;
+        }
+        else
+        {
+            positionActuel.x=positionSec.x;
+            positionActuel.y=positionSec.y;
+        }
 
 
         int valeurActuel=tableauVirtuel[positionActuel.x][positionActuel.y];

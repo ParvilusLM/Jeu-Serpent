@@ -472,6 +472,7 @@ void Menu::selectionElActif()
             jeuPause=false;
             jeuEnCours=false;
             jeuDebut=false;
+            m_sFondEc.setTexture(m_tFondEc);
             m_typeMenu=MenuPrincipal;
         }
         else
@@ -487,6 +488,7 @@ void Menu::selectionElActif()
             jeuEnCours=false;
             jeuDebut=false;
             jeuFinPartie=false;
+            m_sFondEc.setTexture(m_tFondEc);
             m_typeMenu=MenuPrincipal;
         }
         else if(m_elementActif==FINPR_ACTIF)

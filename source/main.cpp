@@ -177,9 +177,6 @@ int main()
 
                 controleurJ.gestMajDonnees();
 
-                //controleurJ.mouvementSerp();
-                //controleurJ.collisionSerp();
-
                 interdictionDpl1=false;
                 interdictionDpl2=false;
 

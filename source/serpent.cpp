@@ -14,6 +14,7 @@ Serpent::Serpent(sf::RenderWindow &fenetre):m_fenetre(0)
 void Serpent::initSerpent()
 {
     m_serpent.clear();
+    m_dirSerp.clear();
 
     std::vector<element_serpent> m_serpent1;
 
